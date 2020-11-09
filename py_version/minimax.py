@@ -302,8 +302,8 @@ def main():
 
     # Main loop of this game
     while len(empty_cells(board)) > 0 and not game_over(board):
-        if first == 'N':
-            ai_turn(c_choice, h_choice)
+        if first == 'N':  # if 'N' was selected
+            ai_turn(c_choice, h_choice)  # calls minimax in here
             first = ''
 
         human_turn(c_choice, h_choice)
