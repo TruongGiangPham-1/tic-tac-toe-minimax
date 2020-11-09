@@ -116,7 +116,7 @@ def set_move(x, y, player):
     :param player: the current player
     """
     if valid_move(x, y):
-        board[x][y] = player  # player = 1
+        board[x][y] = player  # player = 1 or -1 depending on human turn or ai. 
         return True
     else:
         return False
@@ -131,20 +131,20 @@ def minimax(state, depth, player):
     :param player: an human or a computer
     :return: a list with [the best row, best col, best score]
     """
-    if player == COMP:
-        best = [-1, -1, -infinity]
-    else:
+    if player == COMP:  # COMP = +1 # max value
+        best = [-1, -1, -infinity]  # both player starts with worse score.
+    else:  # min value
         best = [-1, -1, +infinity]
 
     if depth == 0 or game_over(state):
-        score = evaluate(state)
+        score = evaluate(state)  # if win state is for COMP. score = 1, vice versa.
         return [-1, -1, score]
 
     for cell in empty_cells(state):
         x, y = cell[0], cell[1]
         state[x][y] = player
         score = minimax(state, depth - 1, -player)
-        state[x][y] = 0
+        state[x][y] = 0  # undo the theoretical move made in 145
         score[0], score[1] = x, y
 
         if player == COMP:
@@ -211,12 +211,12 @@ def ai_turn(c_choice, h_choice):
 
     if depth == 9:
         x = choice([0, 1, 2])  # choice returns randome element from this list. cuz depth = 9 means
-        y = choice([0, 1, 2])  # that all cell empty, so select random x, y location
+        y = choice([0, 1, 2])  # that all cell empty, so select random x, y location. Only trigger if ai first turn
     else:
         move = minimax(board, depth, COMP)
         x, y = move[0], move[1]
 
-    set_move(x, y, COMP)
+    set_move(x, y, COMP)  # calls valid_move() --> empty_cell(): jus checks for empty cell.
     # Paul Lu.  Go full speed.
     # time.sleep(1)
 
@@ -247,16 +247,16 @@ def human_turn(c_choice, h_choice):
     while move < 1 or move > 9:
         try:
             move = int(input('Use numpad (1..9): '))
-            coord = moves[move]
-            can_move = set_move(coord[0], coord[1], HUMAN)
-
+            coord = moves[move]  # get the move coordinate from the dictionary above.
+            can_move = set_move(coord[0], coord[1], HUMAN)  # can_move is a boolean. True if that cell is empty.
+            # also the set_move updates the board state of the human turn.
             if not can_move:
                 print('Bad move')
-                move = -1
+                move = -1  # resets move so that the it can enter the while loop at 251 again.
         except (EOFError, KeyboardInterrupt):
             print('Bye')
             exit()
-        except (KeyError, ValueError):
+        except (KeyError, ValueError):  # valueError could mean that user inputed num such that 9 < n < 1 
             print('Bad choice')
 
 
