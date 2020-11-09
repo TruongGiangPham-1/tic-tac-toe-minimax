@@ -63,7 +63,8 @@ def wins(state, player):
         [state[0][0], state[1][1], state[2][2]],
         [state[2][0], state[1][1], state[0][2]],
     ]
-    if [player, player, player] in win_state:
+    if [player, player, player] in win_state:  # global human = -1 or global comp = +1  == player.
+        # ex. [-1, -1, -1]
         return True
     else:
         return False
@@ -75,7 +76,7 @@ def game_over(state):
     :param state: the state of the current board
     :return: True if the human or computer wins
     """
-    return wins(state, HUMAN) or wins(state, COMP)
+    return wins(state, HUMAN) or wins(state, COMP)  # runs win(HUMAN) and win(COMP)
 
 
 def empty_cells(state):
@@ -115,7 +116,7 @@ def set_move(x, y, player):
     :param player: the current player
     """
     if valid_move(x, y):
-        board[x][y] = player
+        board[x][y] = player  # player = 1
         return True
     else:
         return False
@@ -188,7 +189,7 @@ def render(state, c_choice, h_choice):
     for row in state:
         for cell in row:
             symbol = chars[cell]
-            print(f'| {symbol} |', end='')
+            print(f'| {symbol} |', end='')  # prints l  l   l   l
         print('\n' + str_line)
 
 
@@ -200,17 +201,17 @@ def ai_turn(c_choice, h_choice):
     :param h_choice: human's choice X or O
     :return:
     """
-    depth = len(empty_cells(board))
-    if depth == 0 or game_over(board):
+    depth = len(empty_cells(board))  # depth = amount of empty slot
+    if depth == 0 or game_over(board):  # depth = 0 means that no empty slot and boards are full.
         return
 
     clean()
     print(f'Computer turn [{c_choice}]')
-    render(board, c_choice, h_choice)
+    render(board, c_choice, h_choice)  # prints the board. l  l  l  l
 
     if depth == 9:
-        x = choice([0, 1, 2])
-        y = choice([0, 1, 2])
+        x = choice([0, 1, 2])  # choice returns randome element from this list. cuz depth = 9 means
+        y = choice([0, 1, 2])  # that all cell empty, so select random x, y location
     else:
         move = minimax(board, depth, COMP)
         x, y = move[0], move[1]
