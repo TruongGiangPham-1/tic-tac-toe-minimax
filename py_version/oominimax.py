@@ -48,7 +48,7 @@ class State:
         return str(self.board)
 
     def get_board(self):
-        return
+        return (self.board)
 
     def set_board(self, x, y, player):
         self.board[x][y] = player
@@ -157,7 +157,7 @@ class State:
         str_line = '---------------'
 
         print('\n' + str_line)
-        for row in self.board:
+        for row in self.get_board():  # add get_board here
             for cell in row:
                 symbol = chars[cell]
                 print(f'| {symbol} |', end='')  # prints l  l   l   l
