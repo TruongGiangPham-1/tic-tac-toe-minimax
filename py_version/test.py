@@ -113,6 +113,8 @@ def main():
     state = State()
     print(len(state.empty_cells())) # so that works
     print(state.game_over())  # so that works
+    state.board[0][0] = 5
+    print(state.board)
     
 
 if __name__ =='__main__':

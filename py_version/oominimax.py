@@ -112,6 +112,21 @@ class State:
         """
         return self.wins(HUMAN) or self.wins(COMP)  # runs win(HUMAN) and win(COMP)
 
+    def evaluate(self):
+        """
+        Function to heuristic evaluation of state.
+        :param state: the state of the current board
+        :return: +1 if the computer wins; -1 if the human wins; 0 draw
+        """
+        if self.wins(COMP):
+            score = +1
+        elif self.wins(HUMAN):
+            score = -1
+        else:
+            score = 0
+
+        return score
+
     def render(self, c_choice, h_choice):  # since it loops over the board, then it is in Class State
         """
         Print the board on console
@@ -157,9 +172,9 @@ class Turns:
 
         for cell in state.empty_cells():
             x, y = cell[0], cell[1]
-            state[x][y] = player
+            state.board[x][y] = player
             score = self.minimax(depth - 1, -player, state)
-            state[x][y] = 0  # undo the theoretical move made in 145
+            state.board[x][y] = 0  # undo the theoretical move made in 145
             score[0], score[1] = x, y
 
             if player == COMP:
