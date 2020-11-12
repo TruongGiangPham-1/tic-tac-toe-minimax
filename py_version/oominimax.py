@@ -4,6 +4,15 @@ from random import seed as randomseed       # Paul Lu
 import platform
 import time
 from os import system
+"""
+   oominimax.py is mostly cut and pasted from minimax.py to fit the weekly assignment #6 specification. 
+   minimax.py was written by Clederson Cruz, year 2017. Modified by Paul Lu.
+
+   
+   name: Truong-Giang Pham
+   CCID: 1662405
+
+"""
 # global variable HUMAN and COMP
 HUMAN = -1
 COMP = +1
@@ -33,10 +42,10 @@ class State:
         ]
 
     def __str__(self):
-        return
+        return str(self.board)
 
     def __repr__(self):
-        return
+        return str(self.board)
 
     def empty_cells(self):  # need to be in State class. so def empty_cell(self)
         """

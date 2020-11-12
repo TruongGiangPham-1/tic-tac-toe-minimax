@@ -9,10 +9,10 @@ class State:
         ]
 
     def __str__(self):
-        return
+        return str(self.board)
 
     def __repr__(self):
-        return
+        return str(self.board)
 
     def empty_cells(self):  # need to be in State class. so def empty_cell(self)
         """
@@ -114,7 +114,8 @@ def main():
     print(len(state.empty_cells())) # so that works
     print(state.game_over())  # so that works
     state.board[0][0] = 5
-    print(state.board)
+    print(state)
+    
     
 
 if __name__ =='__main__':
