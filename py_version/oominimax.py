@@ -47,6 +47,12 @@ class State:
     def __repr__(self):
         return str(self.board)
 
+    def get_board(self):
+        return
+
+    def set_board(self):
+        return
+
     def empty_cells(self):  # need to be in State class. so def empty_cell(self)
         """
         Each empty cell will be added into cells' list
@@ -82,7 +88,7 @@ class State:
         :param player: the current player
         """
         if self.valid_move(x, y):  # added self
-            self.board[x][y] = player  # player = 1 or -1 depending on human turn or ai.  added self.
+            self.board[x][y] = player  # add a setter here
             return True
         else:
             return False
