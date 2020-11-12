@@ -160,6 +160,12 @@ class State:
 class Turns:
     def __init__(self):
         pass
+
+    def __str__(self):
+        return str(self.board)
+
+    def __repr__(self):
+        return str(self.board)
             
     def minimax(self, depth, player, state):
         """
