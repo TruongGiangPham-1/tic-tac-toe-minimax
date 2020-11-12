@@ -79,7 +79,7 @@ def game_over(state):
     return wins(state, HUMAN) or wins(state, COMP)  # runs win(HUMAN) and win(COMP)
 
 
-def empty_cells(state):
+def empty_cells(state):  # need to be in State class. so def empty_cell(self)
     """
     Each empty cell will be added into cells' list
     :param state: the state of the current board
@@ -95,7 +95,7 @@ def empty_cells(state):
     return cells
 
 
-def valid_move(x, y):
+def valid_move(x, y):  # uses board so it has to be encapsulate in class State
     """
     A move is valid if the chosen cell is empty
     :param x: X coordinate
@@ -108,7 +108,7 @@ def valid_move(x, y):
         return False
 
 
-def set_move(x, y, player):
+def set_move(x, y, player):  # a setter of Class State
     """
     Set the move on board, if the coordinates are valid
     :param x: X coordinate
@@ -157,7 +157,7 @@ def minimax(state, depth, player):
     return best
 
 
-def clean():
+def clean():  # doesnt need class encapsulation
     """
     Clears the console
     """
@@ -172,7 +172,7 @@ def clean():
         system('clear')
 
 
-def render(state, c_choice, h_choice):
+def render(state, c_choice, h_choice):  # since it loops over the board, then it is in Class State
     """
     Print the board on console
     :param state: current state of the board
@@ -193,7 +193,7 @@ def render(state, c_choice, h_choice):
         print('\n' + str_line)
 
 
-def ai_turn(c_choice, h_choice):
+def ai_turn(c_choice, h_choice):  # in minimax class
     """
     It calls the minimax function if the depth < 9,
     else it choices a random coordinate.
@@ -221,7 +221,7 @@ def ai_turn(c_choice, h_choice):
     # time.sleep(1)
 
 
-def human_turn(c_choice, h_choice):
+def human_turn(c_choice, h_choice):  # in minimax class
     """
     The Human plays choosing a valid move.
     :param c_choice: computer's choice X or O
@@ -242,7 +242,7 @@ def human_turn(c_choice, h_choice):
 
     clean()
     print(f'Human turn [{h_choice}]')
-    render(board, c_choice, h_choice)
+    render(board, c_choice, h_choice)  # possibly call state.render()
 
     while move < 1 or move > 9:
         try:
