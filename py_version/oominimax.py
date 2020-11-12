@@ -50,7 +50,8 @@ class State:
     def get_board(self):
         return
 
-    def set_board(self):
+    def set_board(self, x, y, player):
+        self.board[x][y] = player
         return
 
     def empty_cells(self):  # need to be in State class. so def empty_cell(self)
@@ -88,7 +89,7 @@ class State:
         :param player: the current player
         """
         if self.valid_move(x, y):  # added self
-            self.board[x][y] = player  # add a setter here
+            self.set_board(x, y, player)  # add a setter here
             return True
         else:
             return False
