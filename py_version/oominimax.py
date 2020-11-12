@@ -194,9 +194,9 @@ class Turns:
 
         for cell in state.empty_cells():
             x, y = cell[0], cell[1]
-            state.board[x][y] = player
+            state.set_board(x,y,player)  # add a setter here.
             score = self.minimax(depth - 1, -player, state)
-            state.board[x][y] = 0  # undo the theoretical move made in 145
+            state.board[x][y] = 0  # undo the theoretical move made in 145  # perhpas add board reset  method.
             score[0], score[1] = x, y
 
             if player == COMP:
