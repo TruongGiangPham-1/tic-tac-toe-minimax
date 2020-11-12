@@ -166,7 +166,8 @@ class State:
 
 class Turns:
     def __init__(self):
-        pass
+        self.HUMAN = -1
+        self.COMP = +1
 
     def __str__(self):
         return str(self.board)
