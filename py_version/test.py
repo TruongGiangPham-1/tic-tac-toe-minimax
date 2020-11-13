@@ -7,13 +7,14 @@ class State:
                  [0, 0, 0],
                  [0, 0, 0],
         ]
-        self.TEST = 1
+        self.type = str(self.__class__)
 
     def __str__(self):
-        return str(self.board)
+        return(self.type)
 
     def __repr__(self):
-        return str(self.board)
+        s = "<%d> %s" % (id(self), self.type)
+        return(s)
 
     def empty_cells(self):  # need to be in State class. so def empty_cell(self)
         """
@@ -112,12 +113,10 @@ class State:
 
 def main():
     state = State()
-    print(len(state.empty_cells())) # so that works
-    print(state.game_over())  # so that works
-    state.board[0][0] = 5
+  
     print(state)
-    print(state.TEST)
-    
+
+    print(state.__repr__())
     
 
 if __name__ =='__main__':

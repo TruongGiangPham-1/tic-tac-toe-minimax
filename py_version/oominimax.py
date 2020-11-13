@@ -5,7 +5,8 @@ import platform
 import time
 from os import system
 """
-   oominimax.py is mostly cut and pasted from minimax.py to fit the weekly assignment #6 specification. 
+   oominimax.py is mostly cut and pasted from minimax.py to fit the 
+   weekly exeercise #6 specification. 
    minimax.py was written by Clederson Cruz, year 2017. Modified by Paul Lu.
 
    
@@ -13,8 +14,6 @@ from os import system
    CCID: 1662405
 
 """
-# global variable HUMAN and COMP
-
 
 
 def clean():
@@ -34,26 +33,50 @@ def clean():
 
 class State:
     def __init__(self):
+        """Description: instantiates the board object.
+           Argument: self
+           Returns: None
+        """
+        self.type = str(self.__class__)
         self.board = [
                  [0, 0, 0],
                  [0, 0, 0],
                  [0, 0, 0],
         ]
+        return
 
     def __str__(self):
-        return str(self.board)
+        """Description: this method execute when print() is invoked.
+           Arguments: self
+           return: the class type of the object
+        """
+        return self.type
 
     def __repr__(self):
-        return str(self.board)
+        """Description: formal representation of the class object
+           Argument: self
+           return: the object id and the class type.
+        """
+        return f'<{id(self.type)}> {self.type}'
 
     def get_board(self):
+        """Description: a getter for the self.board attribute.
+           Argument: self
+           return: the self.board attribute.
+        """
         return (self.board)
 
     def set_board(self, x, y, player):
+        """Description: a setter for the self.board attribute.
+           Argument: self, x, y, player
+                     x, y is the coordinate of the board
+                     player is HUMAN or COMP
+            return: None
+        """
         self.board[x][y] = player
         return
 
-    def empty_cells(self):  # need to be in State class. so def empty_cell(self)
+    def empty_cells(self):  
         """
         Each empty cell will be added into cells' list
         :param state: the state of the current board
@@ -68,27 +91,27 @@ class State:
 
         return cells
 
-    def valid_move(self, x, y):  # uses board so it has to be encapsulate in class State
+    def valid_move(self, x, y):  
         """
         A move is valid if the chosen cell is empty
         :param x: X coordinate
         :param y: Y coordinate
         :return: True if the board[x][y] is empty
         """
-        if [x, y] in self.empty_cells():  # added self.
+        if [x, y] in self.empty_cells():  
             return True
         else:
             return False
 
-    def set_move(self, x, y, player):  # a setter of Class State
+    def set_move(self, x, y, player): 
         """
         Set the move on board, if the coordinates are valid
         :param x: X coordinate
         :param y: Y coordinate
         :param player: the current player
         """
-        if self.valid_move(x, y):  # added self
-            self.set_board(x, y, player)  # add a setter here
+        if self.valid_move(x, y):  
+            self.set_board(x, y, player)  
             return True
         else:
             return False
@@ -113,8 +136,7 @@ class State:
             [self.board[0][0], self.board[1][1], self.board[2][2]],
             [self.board[2][0], self.board[1][1], self.board[0][2]],
         ]
-        if [player, player, player] in win_state:  # global human = -1 or global comp = +1  == player.
-            # ex. [-1, -1, -1]
+        if [player, player, player] in win_state:  
             return True
         else:
             return False
@@ -124,14 +146,20 @@ class State:
         This function test if the human or computer wins
         :param state: the state of the current board
         :return: True if the human or computer wins
+
+        **Note: Truong-Giang Pham change this method's parameter, now it takes
+                in COMP and HUMAN variable.
         """
-        return self.wins(HUMAN) or self.wins(COMP)  # runs win(HUMAN) and win(COMP)
+        return self.wins(HUMAN) or self.wins(COMP)  
 
     def evaluate(self, COMP, HUMAN):
         """
         Function to heuristic evaluation of state.
         :param state: the state of the current board
         :return: +1 if the computer wins; -1 if the human wins; 0 draw
+
+        **Note: Truong-Giang Pham change this method's parameter, now it takes
+                in COMP and HUMAN variable.
         """
         if self.wins(COMP):
             score = +1
@@ -142,7 +170,7 @@ class State:
 
         return score
 
-    def render(self, c_choice, h_choice):  # since it loops over the board, then it is in Class State
+    def render(self, c_choice, h_choice):  
         """
         Print the board on console
         :param state: current state of the board
@@ -156,23 +184,37 @@ class State:
         str_line = '---------------'
 
         print('\n' + str_line)
-        for row in self.get_board():  # add get_board here
+        for row in self.get_board():  
             for cell in row:
                 symbol = chars[cell]
-                print(f'| {symbol} |', end='')  # prints l  l   l   l
+                print(f'| {symbol} |', end='')  
             print('\n' + str_line)
 
 
 class Turns:
     def __init__(self):
+        """Description: initiatize HUMAN,COMP, and type attributes.
+           Argument: self
+           Return: none
+        """
+        self.type = str(self.__class__)
         self.HUMAN = -1
         self.COMP = +1
+        return
 
     def __str__(self):
-        return str(self.HUMAN)
+        """Description: this method execute when print() is invoked.
+           Arguments: self
+           Return: the class type of the object
+        """
+        return self.type
 
     def __repr__(self):
-        return str(self.HUMAN)
+        """Description: formal representation of the class object
+           Argument: self
+           return: the object id and the class type.
+        """
+        return f'<{id(self.type)}> {self.type}'
             
     def minimax(self, depth, player, state):
         """
@@ -183,20 +225,20 @@ class Turns:
         :param player: an human or a computer
         :return: a list with [the best row, best col, best score]
         """
-        if player == self.COMP:  # COMP = +1 # max value
-            best = [-1, -1, -infinity]  # both player starts with worse score.
-        else:  # min value
+        if player == self.COMP:  
+            best = [-1, -1, -infinity]  
+        else:  
             best = [-1, -1, +infinity]
 
         if depth == 0 or state.game_over(self.COMP, self.HUMAN):
-            score = state.evaluate(self.COMP, self.HUMAN)  # if win state is for COMP. score = 1, vice versa.
+            score = state.evaluate(self.COMP, self.HUMAN)  
             return [-1, -1, score]
 
         for cell in state.empty_cells():
             x, y = cell[0], cell[1]
-            state.set_board(x,y,player)  # add a setter here.
+            state.set_board(x,y,player)  
             score = self.minimax(depth - 1, -player, state)
-            state.board[x][y] = 0  # undo the theoretical move made in 145  # perhpas add board reset  method.
+            state.board[x][y] = 0  
             score[0], score[1] = x, y
 
             if player == self.COMP:
@@ -204,11 +246,11 @@ class Turns:
                     best = score  # max value
             else:
                 if score[2] < best[2]:
-                    best = score  # min value
+                    best = score  
 
         return best
 
-    def ai_turn(self, c_choice, h_choice, state):  # in minimax class
+    def ai_turn(self, c_choice, h_choice, state):  
         """
         It calls the minimax function if the depth < 9,
         else it choices a random coordinate.
@@ -216,26 +258,26 @@ class Turns:
         :param h_choice: human's choice X or O
         :return:
         """
-        depth = len(state.empty_cells())  # depth = amount of empty slot
-        if depth == 0 or state.game_over(self.COMP, self.HUMAN):  # depth = 0 means that no empty slot and boards are full.
+        depth = len(state.empty_cells())  
+        if depth == 0 or state.game_over(self.COMP, self.HUMAN):  
             return
 
         clean()
         print(f'Computer turn [{c_choice}]')
-        state.render(c_choice, h_choice)  # prints the board. l  l  l  l
+        state.render(c_choice, h_choice)  
 
         if depth == 9:
-            x = choice([0, 1, 2])  # choice returns randome element from this list. cuz depth = 9 means
-            y = choice([0, 1, 2])  # that all cell empty, so select random x, y location. Only trigger if ai first turn
+            x = choice([0, 1, 2])  
+            y = choice([0, 1, 2])  
         else:
             move = self.minimax(depth, self.COMP, state)
             x, y = move[0], move[1]
 
-        state.set_move(x, y, self.COMP)  # calls valid_move() --> empty_cell(): jus checks for empty cell.
+        state.set_move(x, y, self.COMP) 
         # Paul Lu.  Go full speed.
         # time.sleep(1)
 
-    def human_turn(self, c_choice, h_choice, state):  # in minimax class
+    def human_turn(self, c_choice, h_choice, state):  
         """
         The Human plays choosing a valid move.
         :param c_choice: computer's choice X or O
@@ -256,21 +298,20 @@ class Turns:
 
         clean()
         print(f'Human turn [{h_choice}]')
-        state.render(c_choice, h_choice)  # possibly call state.render()
+        state.render(c_choice, h_choice)  
 
         while move < 1 or move > 9:
             try:
                 move = int(input('Use numpad (1..9): '))
-                coord = moves[move]  # get the move coordinate from the dictionary above.
-                can_move = state.set_move(coord[0], coord[1], self.HUMAN)  # can_move is a boolean. True if that cell is empty.
-                # also the set_move updates the board state of the human turn.
+                coord = moves[move]  
+                can_move = state.set_move(coord[0], coord[1], self.HUMAN)  
                 if not can_move:
                     print('Bad move')
-                    move = -1  # resets move so that the it can enter the while loop at 251 again.
+                    move = -1  
             except (EOFError, KeyboardInterrupt):
                 print('Bye')
                 exit()
-            except (KeyError, ValueError):  # valueError could mean that user inputed num such that 9 < n < 1 
+            except (KeyError, ValueError):  
                 print('Bad choice')
 
 
@@ -311,12 +352,12 @@ def main():
             print('Bad choice')
     # Instantiate State class object
     state = State()
-    # Instantiate Minimax()
+    # Instantiate turns_object object
     turns_object = Turns()
     # Main loop of this game
     while len(state.empty_cells()) > 0 and not state.game_over(turns_object.COMP, turns_object.HUMAN):
-        if first == 'N':  # if 'N' was selected
-            turns_object.ai_turn(c_choice, h_choice, state)  # calls minimax in here
+        if first == 'N':  
+            turns_object.ai_turn(c_choice, h_choice, state)  
             first = ''
 
         turns_object.human_turn(c_choice, h_choice, state)
