@@ -1,3 +1,57 @@
+commit a031e2168d0be6c113db420ef37169b5ebbcbdb2
+Author: TruongGiangPham-1 <johnpham4648@gmail.com>
+Date:   Fri Nov 13 15:07:01 2020 -0700
+
+    pep8 style
+
+commit 2989661d66ae4b915c6d55dcdc36741726214184
+Author: TruongGiangPham <johnpham4648@gmail.com>
+Date:   Fri Nov 13 14:51:11 2020 -0700
+
+    added docstrings
+
+commit 5da53b4c19d97afd2314538a09796308a3dcc62e
+Author: TruongGiangPham <johnpham4648@gmail.com>
+Date:   Fri Nov 13 13:56:29 2020 -0700
+
+    encapsulated the global variable within a class
+
+commit 17c3247dfee25599a448b0ca0d95165679c2aab4
+Author: TruongGiangPham <johnpham4648@gmail.com>
+Date:   Thu Nov 12 13:28:24 2020 -0700
+
+    changing the global variable
+
+commit 255238bdcb1329842321b5b3714bd9bb5a173559
+Author: TruongGiangPham-1 <johnpham4648@gmail.com>
+Date:   Thu Nov 12 13:23:12 2020 -0700
+
+     passed makefile test and have git log.txt
+
+commit fad7eac4141e95e3136b5d9960f254eac99af565
+Author: TruongGiangPham <johnpham4648@gmail.com>
+Date:   Thu Nov 12 11:07:33 2020 -0700
+
+    successfully added setter in minimax method
+
+commit 8a2fcb70efb92156a272b63024380554d3a80fef
+Author: TruongGiangPham <johnpham4648@gmail.com>
+Date:   Thu Nov 12 10:59:31 2020 -0700
+
+     added one getter in render method
+
+commit c6a3312b1947ecb0e329b3773dbca7e0c6f33b0d
+Author: TruongGiangPham <johnpham4648@gmail.com>
+Date:   Thu Nov 12 10:54:28 2020 -0700
+
+    added setter for set_move method
+
+commit 35b95133336d4691624d723ae3a59f78d185dbb3
+Author: TruongGiangPham <johnpham4648@gmail.com>
+Date:   Thu Nov 12 10:46:25 2020 -0700
+
+    need to incorporate getter and setter. just slight changes
+
 commit 058e016680936e64ca93916d456d8e5d44edf888
 Author: TruongGiangPham-1 <johnpham4648@gmail.com>
 Date:   Thu Nov 12 10:28:28 2020 -0700
