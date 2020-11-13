@@ -7,6 +7,7 @@ class State:
                  [0, 0, 0],
                  [0, 0, 0],
         ]
+        self.TEST = 1
 
     def __str__(self):
         return str(self.board)
@@ -115,6 +116,7 @@ def main():
     print(state.game_over())  # so that works
     state.board[0][0] = 5
     print(state)
+    print(state.TEST)
     
     
 

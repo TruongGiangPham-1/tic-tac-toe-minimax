@@ -14,8 +14,7 @@ from os import system
 
 """
 # global variable HUMAN and COMP
-HUMAN = -1
-COMP = +1
+
 
 
 def clean():
@@ -120,7 +119,7 @@ class State:
         else:
             return False
 
-    def game_over(self):
+    def game_over(self, COMP, HUMAN):
         """
         This function test if the human or computer wins
         :param state: the state of the current board
@@ -128,7 +127,7 @@ class State:
         """
         return self.wins(HUMAN) or self.wins(COMP)  # runs win(HUMAN) and win(COMP)
 
-    def evaluate(self):
+    def evaluate(self, COMP, HUMAN):
         """
         Function to heuristic evaluation of state.
         :param state: the state of the current board
@@ -170,10 +169,10 @@ class Turns:
         self.COMP = +1
 
     def __str__(self):
-        return str(self.board)
+        return str(self.HUMAN)
 
     def __repr__(self):
-        return str(self.board)
+        return str(self.HUMAN)
             
     def minimax(self, depth, player, state):
         """
@@ -184,13 +183,13 @@ class Turns:
         :param player: an human or a computer
         :return: a list with [the best row, best col, best score]
         """
-        if player == COMP:  # COMP = +1 # max value
+        if player == self.COMP:  # COMP = +1 # max value
             best = [-1, -1, -infinity]  # both player starts with worse score.
         else:  # min value
             best = [-1, -1, +infinity]
 
-        if depth == 0 or state.game_over():
-            score = state.evaluate()  # if win state is for COMP. score = 1, vice versa.
+        if depth == 0 or state.game_over(self.COMP, self.HUMAN):
+            score = state.evaluate(self.COMP, self.HUMAN)  # if win state is for COMP. score = 1, vice versa.
             return [-1, -1, score]
 
         for cell in state.empty_cells():
@@ -200,7 +199,7 @@ class Turns:
             state.board[x][y] = 0  # undo the theoretical move made in 145  # perhpas add board reset  method.
             score[0], score[1] = x, y
 
-            if player == COMP:
+            if player == self.COMP:
                 if score[2] > best[2]:
                     best = score  # max value
             else:
@@ -218,7 +217,7 @@ class Turns:
         :return:
         """
         depth = len(state.empty_cells())  # depth = amount of empty slot
-        if depth == 0 or state.game_over():  # depth = 0 means that no empty slot and boards are full.
+        if depth == 0 or state.game_over(self.COMP, self.HUMAN):  # depth = 0 means that no empty slot and boards are full.
             return
 
         clean()
@@ -229,10 +228,10 @@ class Turns:
             x = choice([0, 1, 2])  # choice returns randome element from this list. cuz depth = 9 means
             y = choice([0, 1, 2])  # that all cell empty, so select random x, y location. Only trigger if ai first turn
         else:
-            move = self.minimax(depth, COMP, state)
+            move = self.minimax(depth, self.COMP, state)
             x, y = move[0], move[1]
 
-        state.set_move(x, y, COMP)  # calls valid_move() --> empty_cell(): jus checks for empty cell.
+        state.set_move(x, y, self.COMP)  # calls valid_move() --> empty_cell(): jus checks for empty cell.
         # Paul Lu.  Go full speed.
         # time.sleep(1)
 
@@ -244,7 +243,7 @@ class Turns:
         :return:
         """
         depth = len(state.empty_cells())
-        if depth == 0 or state.game_over():
+        if depth == 0 or state.game_over(self.COMP, self.HUMAN):
             return
 
         # Dictionary of valid moves
@@ -263,7 +262,7 @@ class Turns:
             try:
                 move = int(input('Use numpad (1..9): '))
                 coord = moves[move]  # get the move coordinate from the dictionary above.
-                can_move = state.set_move(coord[0], coord[1], HUMAN)  # can_move is a boolean. True if that cell is empty.
+                can_move = state.set_move(coord[0], coord[1], self.HUMAN)  # can_move is a boolean. True if that cell is empty.
                 # also the set_move updates the board state of the human turn.
                 if not can_move:
                     print('Bad move')
@@ -315,7 +314,7 @@ def main():
     # Instantiate Minimax()
     turns_object = Turns()
     # Main loop of this game
-    while len(state.empty_cells()) > 0 and not state.game_over():
+    while len(state.empty_cells()) > 0 and not state.game_over(turns_object.COMP, turns_object.HUMAN):
         if first == 'N':  # if 'N' was selected
             turns_object.ai_turn(c_choice, h_choice, state)  # calls minimax in here
             first = ''
@@ -324,12 +323,12 @@ def main():
         turns_object.ai_turn(c_choice, h_choice, state)
 
     # Game over message
-    if state.wins(HUMAN):
+    if state.wins(turns_object.HUMAN):
         clean()
         print(f'Human turn [{h_choice}]')
         state.render(c_choice, h_choice)
         print('YOU WIN!')
-    elif state.wins(COMP):
+    elif state.wins(turns_object.COMP):
         clean()
         print(f'Computer turn [{c_choice}]')
         state.render(c_choice, h_choice)
