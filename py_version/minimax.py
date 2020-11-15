@@ -4,7 +4,7 @@ from random import seed as randomseed       # Paul Lu
 import platform
 import time
 from os import system
-# Truong
+
 """
 An implementation of Minimax AI Algorithm in Tic Tac Toe,
 using Python.
@@ -13,9 +13,8 @@ Author: Clederson Cruz
 Year: 2017
 License: GNU GENERAL PUBLIC LICENSE (GPL)
 
-Example:
-Paul Lu
-CCID:  paullu
+Name: Truong-Giang Pham
+CCID: 1662405
 """
 
 HUMAN = -1
