@@ -352,7 +352,7 @@ def main():
             print('Bad choice')
     # Instantiate State class object
     state = State()
-    # Instantiate turns_object object
+    # Instantiate Turns class object
     turns_object = Turns()
     # Main loop of this game
     while len(state.empty_cells()) > 0 and \
