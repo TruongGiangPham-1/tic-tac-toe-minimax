@@ -1,0 +1,42 @@
+#--------------------------------------------
+#   Name: Truong-Giang Pham
+#   ID: 1662405
+#   CMPUT 274, Fall 2020
+#
+#   Weekly Exercise #6: oominimax
+#-------------------------------------------- 
+
+
+
+Included files:
+        -oominimax.py
+        -README
+        -debugger.png
+        -submit.git.log.txt
+
+
+Running instruction:
+        oominimax.py can be run in the terminal using the commands:
+            python3 oominimax
+        The program will ask the user to choose between X or O to plat tic tac toe
+        After the program will ask if the user wants to start first.
+        The user will have to use the NUMPAD from 1-9 to place X/O on the grid.
+        The corresponding NUMPAD keys on the board are:
+        |1|2|3|
+        |4|5|6|
+        |7|8|9|
+        
+
+Notes and assumption:
+        oominimax.py is mostly cut and pasted from minimax.py to fit the
+        weekly exeercise #6 specification.
+        minimax.py was written by Clederson Cruz, year 2017. Modified by Paul Lu.
+
+        What I changed from the original minimax.py is to create a class State, and class Turns.
+        In class State, I added the following method: def __init__(self), def __str__(self), def get_board(self),
+                                                      def __repr__(self), def set_board(self, x, y, player).
+
+        In class Turns, I added the following method: def __init__(self), def __str__(self), def __repr__(self).
+        
+
+      
